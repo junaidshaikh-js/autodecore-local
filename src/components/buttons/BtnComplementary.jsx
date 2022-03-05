@@ -1,5 +1,7 @@
 import "./button.css";
 
-export function BtnComplementary({ buttonText }) {
-  return <button class="btn btn-complementary">{buttonText}</button>;
+export function BtnComplementary({ children, cnames }) {
+  return (
+    <button className={"btn btn-complementary " + cnames}>{children}</button>
+  );
 }
