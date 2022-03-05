@@ -12,6 +12,10 @@
   top: 24%;
 }
 
+.hy-hamburger-btn {
+  font-size: 1.2rem;
+}
+
 .btn.login-btn,
 .btn.signup-btn,
 .btn.logout-btn {
