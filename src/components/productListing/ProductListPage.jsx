@@ -18,6 +18,7 @@ export function ProductListingPage() {
 
   useEffect(() => {
     getProducts(dispatch, setIsloading);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
