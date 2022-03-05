@@ -13,7 +13,9 @@ export function Header() {
         <nav className="hy-navbar px-sm pb-sm pt-1">
           <div className="hy-navbar-links-container mr-1 mb-sm">
             <div className="align-center">
-              <BtnIcon Icon={FaBars} cnames={["btn", "hy-hamburger-btn"]} />
+              <BtnIcon cnames={["btn", "hy-hamburger-btn"]}>
+                <FaBars />
+              </BtnIcon>
 
               <div className="hy-logo">
                 <a href="./index.html">
