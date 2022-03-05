@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import axios from "axios";
 
 import { PRODUCTS_URL } from "./constant";
