@@ -18,7 +18,8 @@ export function ProductListingPage() {
 
   useEffect(() => {
     getProducts(dispatch, setIsloading);
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <main className="product-listing flex flex-column">
