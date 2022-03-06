@@ -18,7 +18,7 @@ export function Header() {
               </BtnIcon>
 
               <div className="hy-logo">
-                <a href="./index.html">
+                <a href="#">
                   <span>
                     Auto<span style={{ color: "#FFDE59" }}>Decore</span>
                   </span>
