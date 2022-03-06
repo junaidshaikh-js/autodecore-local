@@ -1,16 +1,23 @@
+import { Link } from "react-router-dom";
+
+import { useStateContext } from "../../context/state-context";
 import { BtnSecondary } from "../buttons";
 
 export function NavButtons() {
+  const {
+    state: { productsInCart, productsInWishList },
+  } = useStateContext();
+
   return (
     <div>
       <ul className="hy-navbar-links">
         <li className="mr-1">
-          <a className="logout-btn" href="./index.html">
+          <span>
             <BtnSecondary buttonText="login" />
-          </a>
+          </span>
         </li>
         <li className="mr-1">
-          <a href="./wishlist.html">
+          <span>
             <div className="btn btn-icon btn-icon-md badge-container">
               <i
                 className="far fa-heart"
@@ -19,23 +26,25 @@ export function NavButtons() {
               ></i>
 
               <span className="badge badge-md badge-num top-right bg-complimentary">
-                0
+                {productsInWishList.length}
               </span>
             </div>
             <span className="visually-hidden">Wishlist</span>
-          </a>
+          </span>
         </li>
 
         <li>
-          <a href="./cart.html">
+          <Link to="/cart">
             <div className="btn btn-icon btn-icon-md badge-container">
               <i className="fas fa-shopping-cart" title="Shopping Cart"></i>
-              <span className="badge badge-md badge-num top-right bg-complimentary">
-                0
-              </span>
+              {productsInCart.length ? (
+                <span className="badge badge-md badge-num top-right bg-complimentary">
+                  {productsInCart.length}
+                </span>
+              ) : null}
             </div>
             <span className="visually-hidden">Cart </span>
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
