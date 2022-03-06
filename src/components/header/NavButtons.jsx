@@ -12,12 +12,12 @@ export function NavButtons() {
     <div>
       <ul className="hy-navbar-links">
         <li className="mr-1">
-          <a className="logout-btn" href="#">
+          <span>
             <BtnSecondary buttonText="login" />
-          </a>
+          </span>
         </li>
         <li className="mr-1">
-          <a href="#">
+          <span>
             <div className="btn btn-icon btn-icon-md badge-container">
               <i
                 className="far fa-heart"
@@ -30,7 +30,7 @@ export function NavButtons() {
               </span>
             </div>
             <span className="visually-hidden">Wishlist</span>
-          </a>
+          </span>
         </li>
 
         <li>

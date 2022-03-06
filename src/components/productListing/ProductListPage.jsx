@@ -18,7 +18,7 @@ export function ProductListingPage() {
 
   useEffect(() => {
     getProducts(dispatch, setIsloading);
-  }, []);
+  }, [dispatch]);
 
   return (
     <main className="product-listing flex flex-column">
