@@ -1,6 +1,7 @@
 import { ProductHeader } from "./ProductHeader";
-import { BtnComplementary, BtnIcon } from "../buttons";
+import { BtnIcon } from "../buttons";
 import { ProductCardPrice } from "./ProductCardPrice";
+import { AddToCartBtn } from "./AddToCartBtn";
 
 export function ProductCard({ product }) {
   return (
@@ -25,10 +26,12 @@ export function ProductCard({ product }) {
         />
 
         <div className="card-btn-container">
-          <BtnComplementary cnames="w-100 btn-addtocart">
+          <AddToCartBtn product={product} />
+
+          {/* <BtnComplementary cnames="w-100 btn-addtocart">
             <i className="fas fa-shopping-cart"></i>
             <span>Add to Cart</span>
-          </BtnComplementary>
+          </BtnComplementary> */}
 
           <BtnIcon cnames={["btn", "icon-btn-primary", "btn-wishlist"]}>
             <i className="far fa-heart" title="add to wishlist"></i>
