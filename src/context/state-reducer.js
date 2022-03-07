@@ -31,7 +31,7 @@ export function stateReducer(state, { type, payload }) {
       return {
         ...state,
         productsInWishList: state.productsInWishList.filter(
-          (product) => product.id !== payload
+          (product) => product.product_id !== payload
         ),
       };
     default:

@@ -166,15 +166,23 @@ export async function toggleWishList(dispatch, product, setIsUpdating, state) {
     try {
       const res = await axios({
         method: "delete",
-        url: `${WISHLIST_URL}/${product.id}`,
+        url: `${WISHLIST_URL}/${
+          state.productsInWishList.findIndex(
+            (item) => item.product_id == product.id
+          ) + 1
+        }`,
       });
 
       if ((res.status = "200" || res.status == "201")) {
-        dispatch({ type: "REMOVE_ITEM_FROM_WISHLIST", payload: res.data.id });
+        dispatch({
+          type: "REMOVE_ITEM_FROM_WISHLIST",
+          payload: res.data.product_id,
+        });
       }
 
       setIsUpdating(false);
     } catch (error) {
+      setIsUpdating(false);
       throw new Error("can not be deleted to wishlist");
     }
   }
