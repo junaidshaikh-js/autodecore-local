@@ -1,5 +1,9 @@
 import { useStateContext } from "../../context";
 import { EmptyCart } from "./EmptyCart";
+import { CartDetails } from "./CartDetails";
+import { CartPriceDetails } from "./CartPriceDetails";
+
+import "./cart.css";
 
 export function Cart() {
   const {
@@ -11,11 +15,12 @@ export function Cart() {
       {!productsInCart.length ? (
         <EmptyCart />
       ) : (
-        productsInCart.map((product) => (
-          <span key={product.id}>
-            {product.name} {product.cartQty}
-          </span>
-        ))
+        <main className="cart-main mt-1">
+          <div className="cart-container flex flex-column mx-1">
+            <CartDetails />
+            <CartPriceDetails />
+          </div>
+        </main>
       )}
     </>
   );

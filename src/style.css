@@ -83,6 +83,10 @@ ul {
   align-items: center;
 }
 
+.align-self-center {
+  align-self: center;
+}
+
 .flex-grow {
   flex-grow: 1;
 }
