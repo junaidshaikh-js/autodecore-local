@@ -31,8 +31,7 @@ export function AddToCartBtn({ product }) {
         <span className="flex justify-center align-center">
           <InlineLoader /> "Adding"
         </span>
-      ) : Boolean(isInList(state.productsInCart, product.id)) &&
-        product.inStock ? (
+      ) : isInList(state.productsInCart, product.id) && product.inStock ? (
         "Go to Cart"
       ) : (
         "Add to Cart"
