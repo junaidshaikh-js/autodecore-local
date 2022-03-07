@@ -17,22 +17,24 @@ export function NavButtons() {
           </span>
         </li>
         <li className="mr-1">
-          <span>
-            <div className="btn btn-icon btn-icon-md badge-container">
-              <i
-                className="far fa-heart"
-                title="Wishlist"
-                aria-hidden="true"
-              ></i>
+          <Link to="/wishlist">
+            <span>
+              <div className="btn btn-icon btn-icon-md badge-container">
+                <i
+                  className="far fa-heart"
+                  title="Wishlist"
+                  aria-hidden="true"
+                ></i>
 
-              {productsInWishList.length ? (
-                <span className="badge badge-md badge-num top-right bg-complimentary">
-                  {productsInWishList.length}
-                </span>
-              ) : null}
-            </div>
-            <span className="visually-hidden">Wishlist</span>
-          </span>
+                {productsInWishList.length ? (
+                  <span className="badge badge-md badge-num top-right bg-complimentary">
+                    {productsInWishList.length}
+                  </span>
+                ) : null}
+              </div>
+              <span className="visually-hidden">Wishlist</span>
+            </span>
+          </Link>
         </li>
 
         <li>
