@@ -1,6 +1,8 @@
-.cart-main {
+.cart-main,
+.empty-cart-main {
   max-width: 1200px;
   margin: 1rem auto;
+  width: 95vw;
 }
 
 .cart-details {
@@ -30,6 +32,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* empty cart styles */
+.empty-cart-main figure {
+  width: 200px;
+  height: auto;
+  margin: 0 auto;
 }
 
 @media only screen and (min-width: 481px) {
