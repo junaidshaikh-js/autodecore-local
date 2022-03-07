@@ -56,23 +56,32 @@ export const addItemToCart = async (dispatch, product, state, isLoading) => {
   }
 };
 
-export async function decreaseProductQuantity(dispatch, product) {
+export async function decreaseProductQuantity(
+  dispatch,
+  product,
+  setIsUpdating
+) {
   const quantity = product.cartQty - 1;
 
-  updateCartQuantity(dispatch, product, quantity);
+  updateCartQuantity(dispatch, product, quantity, setIsUpdating);
 }
 
-export async function increaseProductQuantity(dispatch, product) {
+export async function increaseProductQuantity(
+  dispatch,
+  product,
+  setIsUpdating
+) {
   if (product.cartQty >= 3) {
     alert("can not add more than 3");
   } else {
     const quantity = product.cartQty + 1;
 
-    updateCartQuantity(dispatch, product, quantity);
+    updateCartQuantity(dispatch, product, quantity, setIsUpdating);
   }
 }
 
-export async function removeItemFromCart(dispatch, product) {
+export async function removeItemFromCart(dispatch, product, setIsUpdating) {
+  setIsUpdating(true);
   try {
     const res = await axios({
       method: "delete",
@@ -82,12 +91,20 @@ export async function removeItemFromCart(dispatch, product) {
     if (res.status == 200 || res.status == 201) {
       dispatch({ type: "REMOVE_ITEM_FROM_CART", payload: res.data.id });
     }
+
+    setIsUpdating(false);
   } catch (error) {
     throw new Error("Item can not be removed");
   }
 }
 
-export async function updateCartQuantity(dispatch, product, quantity) {
+export async function updateCartQuantity(
+  dispatch,
+  product,
+  quantity,
+  setIsUpdating
+) {
+  setIsUpdating(true);
   try {
     const res = await axios({
       method: "put",
@@ -103,6 +120,8 @@ export async function updateCartQuantity(dispatch, product, quantity) {
         payload: { id: product.id, quantity: quantity },
       });
     }
+
+    setIsUpdating(false);
   } catch (error) {
     throw new Error("Cart quantity can not be updated");
   }
