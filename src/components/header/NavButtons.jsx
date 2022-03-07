@@ -25,9 +25,11 @@ export function NavButtons() {
                 aria-hidden="true"
               ></i>
 
-              <span className="badge badge-md badge-num top-right bg-complimentary">
-                {productsInWishList.length}
-              </span>
+              {productsInWishList.length ? (
+                <span className="badge badge-md badge-num top-right bg-complimentary">
+                  {productsInWishList.length}
+                </span>
+              ) : null}
             </div>
             <span className="visually-hidden">Wishlist</span>
           </span>
