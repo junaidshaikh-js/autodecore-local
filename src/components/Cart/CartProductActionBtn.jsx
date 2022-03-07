@@ -7,7 +7,7 @@ import {
 } from "../../utils";
 
 export function CartProductActionBtn({ product }) {
-  const { state, dispatch } = useStateContext();
+  const { dispatch } = useStateContext();
 
   return (
     <section className="cart-product-actions">
