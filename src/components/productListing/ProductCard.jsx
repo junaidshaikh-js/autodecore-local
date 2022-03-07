@@ -6,7 +6,8 @@ import { BtnIcon } from "../buttons";
 import { ProductCardPrice } from "./ProductCardPrice";
 import { AddToCartBtn } from "./AddToCartBtn";
 import { useStateContext } from "../../context";
-import { addToWishlist } from "../../utils";
+import { toggleWishList } from "../../utils";
+import { isInList } from "../../utils";
 
 export function ProductCard({ product }) {
   const { state, dispatch } = useStateContext();
@@ -38,10 +39,12 @@ export function ProductCard({ product }) {
 
           <BtnIcon
             cnames={["btn", "icon-btn-primary", "btn-wishlist"]}
-            onClick={() => addToWishlist(dispatch, product, setIsUpdating)}
+            onClick={() =>
+              toggleWishList(dispatch, product, setIsUpdating, state)
+            }
             disabled={isUpdating}
           >
-            {product.inWishList ? (
+            {isInList(state.productsInWishList, product.id) ? (
               <FaHeart color="red" fontSize="18px" />
             ) : (
               <FaRegHeart color="red" fontSize="18px" />
