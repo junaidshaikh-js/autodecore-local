@@ -4,8 +4,9 @@ export function stateReducer(state, { type, payload }) {
       return { ...state, products: payload };
     case "SET_CART":
       return { ...state, productsInCart: payload };
+    case "SET_WISHLIST":
+      return { ...state, productsInWishList: payload };
     case "REMOVE_ITEM_FROM_CART":
-      console.log("in remove item from cart", payload);
       return {
         ...state,
         productsInCart: state.productsInCart.filter(
@@ -26,14 +27,12 @@ export function stateReducer(state, { type, payload }) {
         ...state,
         productsInWishList: [...state.productsInWishList, payload],
       };
-    case "UPDATE_PRODUCTS":
+    case "REMOVE_ITEM_FROM_WISHLIST":
       return {
         ...state,
-        products: state.products.map((product) => {
-          return product.id === payload.id
-            ? { ...product, inWishList: payload.wishListStatus }
-            : product;
-        }),
+        productsInWishList: state.productsInWishList.filter(
+          (product) => product.id !== payload
+        ),
       };
     default:
       throw new Error("Unhandled action type");
