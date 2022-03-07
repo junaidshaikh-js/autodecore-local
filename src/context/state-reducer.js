@@ -21,6 +21,20 @@ export function stateReducer(state, { type, payload }) {
             : product
         ),
       };
+    case "ADD_TO_WISHLIST":
+      return {
+        ...state,
+        productsInWishList: [...state.productsInWishList, payload],
+      };
+    case "UPDATE_PRODUCTS":
+      return {
+        ...state,
+        products: state.products.map((product) => {
+          return product.id === payload.id
+            ? { ...product, inWishList: payload.wishListStatus }
+            : product;
+        }),
+      };
     default:
       throw new Error("Unhandled action type");
   }

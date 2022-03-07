@@ -1,7 +1,7 @@
 /* eslint-disable eqeqeq */
 import axios from "axios";
 
-import { PRODUCTS_URL, CART_URL } from "./constant";
+import { PRODUCTS_URL, CART_URL, WISHLIST_URL } from "./constant";
 
 export const getProducts = async (dispatch, setLoading) => {
   try {
@@ -124,5 +124,50 @@ export async function updateCartQuantity(
     setIsUpdating(false);
   } catch (error) {
     throw new Error("Cart quantity can not be updated");
+  }
+}
+
+export async function addToWishlist(dispatch, product, setIsUpdating) {
+  setIsUpdating(true);
+  try {
+    const res = await axios({
+      method: "post",
+      url: WISHLIST_URL,
+      data: {
+        ...product,
+        inWishList: true,
+      },
+    });
+
+    if ((res.status = "200" || res.status == "201")) {
+      dispatch({ type: "ADD_TO_WISHLIST", payload: res.data });
+
+      updateProducts(dispatch, product, res.data.inWishList);
+    }
+
+    setIsUpdating(true);
+  } catch (error) {
+    throw new Error("can not be added to wishlist");
+  }
+}
+
+async function updateProducts(dispatch, product, wishListStatus) {
+  try {
+    const res = await axios({
+      method: "put",
+      url: `${PRODUCTS_URL}/${product.id}`,
+      data: {
+        inWishList: wishListStatus,
+      },
+    });
+
+    if (res.status == 200 || res.status == 201) {
+      dispatch({
+        type: "UPDATE_PRODUCTS",
+        payload: { id: product.id, wishListStatus: wishListStatus },
+      });
+    }
+  } catch (error) {
+    throw new Error("Products can not be loaded");
   }
 }
