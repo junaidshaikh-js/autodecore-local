@@ -167,9 +167,9 @@ export async function toggleWishList(dispatch, product, setIsUpdating, state) {
       const res = await axios({
         method: "delete",
         url: `${WISHLIST_URL}/${
-          state.productsInWishList.findIndex(
+          state.productsInWishList.find(
             (item) => item.product_id == product.id
-          ) + 1
+          )["id"]
         }`,
       });
 
