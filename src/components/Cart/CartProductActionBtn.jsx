@@ -13,8 +13,8 @@ export function CartProductActionBtn({ product }) {
   const { dispatch } = useStateContext();
 
   return (
-    <section className="cart-product-actions">
-      <div className="product-count flex align-center">
+    <section className="cart-product-actions w-100">
+      <div className="product-count ml-sm flex align-center">
         <button
           className="btn decrease-product-quantity"
           onClick={() => {
@@ -44,7 +44,7 @@ export function CartProductActionBtn({ product }) {
         </button>
       </div>
 
-      <div className="pt-1 mt-sm mx-1 flex justify-between w-100">
+      <div className="pt-sm mt-sm  flex justify-between w-100">
         <button className="btn">
           <FaHeart color="gray" />{" "}
           <span className="ml-sm">Save to wishlist</span>

@@ -11,7 +11,7 @@ export function Header() {
     <header>
       <div className="hy-header-wrapper">
         <nav className="hy-navbar px-sm pb-sm pt-1">
-          <div className="hy-navbar-links-container mr-1 mb-sm">
+          <div className="hy-navbar-links-container  mb-sm">
             <div className="align-center">
               <BtnIcon cnames={["btn", "hy-hamburger-btn"]}>
                 <FaBars />

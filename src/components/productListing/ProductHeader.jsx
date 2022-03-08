@@ -4,7 +4,7 @@ export function ProductHeader({ name, soldBy, rating }) {
     <>
       <p className="h6 card-title">{name}</p>
       <small className="txt-secondary">{soldBy}</small>
-      <div className="product-rating my-1 p-sm">
+      <div className="product-rating my-sm p-sm">
         {rating} <i className="fas fa-star"></i>
       </div>
     </>

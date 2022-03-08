@@ -16,7 +16,7 @@ export function Cart() {
         <EmptyCart />
       ) : (
         <main className="cart-main mt-1">
-          <div className="cart-container flex flex-column mx-1">
+          <div className="cart-container flex flex-column">
             <CartDetails />
             <CartPriceDetails />
           </div>
