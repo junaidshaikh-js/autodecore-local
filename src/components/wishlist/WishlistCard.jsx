@@ -4,11 +4,11 @@ import { ProductHeader } from "../productListing/ProductHeader";
 export function WishlistCard({ product }) {
   return (
     <>
-      <div className="card-image mr-2">
+      <div className="card-image">
         <img className="img-responsive" src={product.image} alt="product" />
       </div>
 
-      <div className="card-body ml-1">
+      <div className="card-body mx-2">
         <ProductHeader
           name={product.name}
           soldBy={product.soldBy}

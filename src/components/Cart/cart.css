@@ -2,7 +2,6 @@
 .empty-cart-main {
   max-width: 1200px;
   margin: 1rem auto;
-  width: 95vw;
 }
 
 .cart-details {
@@ -41,7 +40,22 @@
   margin: 0 auto;
 }
 
-@media only screen and (min-width: 481px) {
+@media only screen and (min-width: 420px) {
+  .cart-main .card-horizontal {
+    flex-direction: column;
+  }
+
+  .card-horizontal .card-product-info {
+    flex-direction: row;
+    flex-grow: 1;
+  }
+
+  .card-product-info .card-body {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 480px) {
   .card-product-info {
     width: 100%;
     margin-bottom: 1rem;
