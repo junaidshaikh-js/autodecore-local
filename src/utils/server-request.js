@@ -1,7 +1,8 @@
 /* eslint-disable eqeqeq */
 import axios from "axios";
 
-import { PRODUCTS_URL, CART_URL } from "./constant";
+import { PRODUCTS_URL, CART_URL, WISHLIST_URL } from "./constant";
+import { isInList } from "./helper-function";
 
 export const getProducts = async (dispatch, setLoading) => {
   try {
@@ -30,6 +31,18 @@ export const getCartProducts = async (dispatch) => {
   }
 };
 
+export const getWishList = async (dispatch) => {
+  try {
+    const res = await axios.get(WISHLIST_URL);
+
+    if (res.status == 200 || res.status == 201) {
+      dispatch({ type: "SET_WISHLIST", payload: res.data });
+    }
+  } catch (error) {
+    throw new Error("Products can not be loaded");
+  }
+};
+
 export const addItemToCart = async (dispatch, product, state, isLoading) => {
   try {
     isLoading(true);
@@ -38,11 +51,11 @@ export const addItemToCart = async (dispatch, product, state, isLoading) => {
       url: CART_URL,
       data: {
         ...product,
+        product_id: product.id,
         cartQty: 1,
       },
     });
 
-    console.log(res.status);
     if (res.status == 200 || res.status == 201) {
       dispatch({
         type: "SET_CART",
@@ -117,12 +130,60 @@ export async function updateCartQuantity(
     if (res.status == 200 || res.status == 201) {
       dispatch({
         type: "UPDATE_CART_QUANTITY",
-        payload: { id: product.id, quantity: quantity },
+        payload: { id: res.data.id, quantity: quantity },
       });
     }
 
     setIsUpdating(false);
   } catch (error) {
     throw new Error("Cart quantity can not be updated");
+  }
+}
+
+export async function toggleWishList(dispatch, product, setIsUpdating, state) {
+  setIsUpdating(true);
+  if (!isInList(state.productsInWishList, product.id)) {
+    try {
+      const res = await axios({
+        method: "post",
+        url: WISHLIST_URL,
+        data: {
+          ...product,
+          product_id: product.id,
+          inWishList: true,
+        },
+      });
+
+      if ((res.status = "200" || res.status == "201")) {
+        dispatch({ type: "ADD_TO_WISHLIST", payload: res.data });
+      }
+
+      setIsUpdating(false);
+    } catch (error) {
+      throw new Error("can not be added to wishlist");
+    }
+  } else {
+    try {
+      const res = await axios({
+        method: "delete",
+        url: `${WISHLIST_URL}/${
+          state.productsInWishList.find(
+            (item) => item.product_id == product.id
+          )["id"]
+        }`,
+      });
+
+      if ((res.status = "200" || res.status == "201")) {
+        dispatch({
+          type: "REMOVE_ITEM_FROM_WISHLIST",
+          payload: res.data.product_id,
+        });
+      }
+
+      setIsUpdating(false);
+    } catch (error) {
+      setIsUpdating(false);
+      throw new Error("can not be deleted to wishlist");
+    }
   }
 }

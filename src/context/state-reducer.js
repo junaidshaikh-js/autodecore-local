@@ -4,8 +4,9 @@ export function stateReducer(state, { type, payload }) {
       return { ...state, products: payload };
     case "SET_CART":
       return { ...state, productsInCart: payload };
+    case "SET_WISHLIST":
+      return { ...state, productsInWishList: payload };
     case "REMOVE_ITEM_FROM_CART":
-      console.log("in remove item from cart", payload);
       return {
         ...state,
         productsInCart: state.productsInCart.filter(
@@ -19,6 +20,18 @@ export function stateReducer(state, { type, payload }) {
           product.id === payload.id
             ? { ...product, cartQty: payload.quantity }
             : product
+        ),
+      };
+    case "ADD_TO_WISHLIST":
+      return {
+        ...state,
+        productsInWishList: [...state.productsInWishList, payload],
+      };
+    case "REMOVE_ITEM_FROM_WISHLIST":
+      return {
+        ...state,
+        productsInWishList: state.productsInWishList.filter(
+          (product) => product.product_id !== payload
         ),
       };
     default:

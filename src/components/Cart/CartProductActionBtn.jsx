@@ -9,7 +9,7 @@ import {
 } from "../../utils";
 
 export function CartProductActionBtn({ product }) {
-  const [isUpdatingCartQyt, setIsUpdatingCartQyt] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
   const { dispatch } = useStateContext();
 
   return (
@@ -18,9 +18,9 @@ export function CartProductActionBtn({ product }) {
         <button
           className="btn decrease-product-quantity"
           onClick={() => {
-            decreaseProductQuantity(dispatch, product, setIsUpdatingCartQyt);
+            decreaseProductQuantity(dispatch, product, setIsUpdating);
           }}
-          disabled={product.cartQty === 1 || isUpdatingCartQyt ? true : false}
+          disabled={product.cartQty === 1 || isUpdating ? true : false}
         >
           <FaMinus />
         </button>
@@ -36,9 +36,9 @@ export function CartProductActionBtn({ product }) {
         <button
           className="btn increase-product-quantity"
           onClick={() =>
-            increaseProductQuantity(dispatch, product, setIsUpdatingCartQyt)
+            increaseProductQuantity(dispatch, product, setIsUpdating)
           }
-          disabled={isUpdatingCartQyt}
+          disabled={isUpdating}
         >
           <FaPlus />
         </button>
@@ -52,8 +52,9 @@ export function CartProductActionBtn({ product }) {
         <button
           className="btn"
           onClick={() => {
-            removeItemFromCart(dispatch, product, setIsUpdatingCartQyt);
+            removeItemFromCart(dispatch, product, setIsUpdating);
           }}
+          disabled={isUpdating}
         >
           <FaTrash color="gray" /> <span className="ml-sm">Remove</span>
         </button>
