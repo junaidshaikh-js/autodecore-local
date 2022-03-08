@@ -1,4 +1,8 @@
 import { useStateContext } from "../../context";
+import { WishUser } from "./WishUser";
+import { WishlistContainer } from "./WishlistContainer";
+
+import "./wishlist.css";
 
 export function Wishlist() {
   const {
@@ -6,10 +10,9 @@ export function Wishlist() {
   } = useStateContext();
 
   return (
-    <>
-      {productsInWishList.map((product) => {
-        return <span key={product.id}>{product.name}</span>;
-      })}
-    </>
+    <main className="wishlist-main flex flex-column">
+      <WishUser />
+      <WishlistContainer />
+    </main>
   );
 }
