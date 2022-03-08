@@ -163,27 +163,37 @@ export async function toggleWishList(dispatch, product, setIsUpdating, state) {
       throw new Error("can not be added to wishlist");
     }
   } else {
-    try {
-      const res = await axios({
-        method: "delete",
-        url: `${WISHLIST_URL}/${
-          state.productsInWishList.find(
-            (item) => item.product_id == product.id
-          )["id"]
-        }`,
+    removeItemFromWishlist(dispatch, product, setIsUpdating, state);
+  }
+}
+
+export async function removeItemFromWishlist(
+  dispatch,
+  product,
+  setIsUpdating,
+  state
+) {
+  console.log(product.id);
+  try {
+    const res = await axios({
+      method: "delete",
+      url: `${WISHLIST_URL}/${
+        state.productsInWishList.find(
+          (item) => item.product_id == (product.product_id ?? product.id)
+        )["id"]
+      }`,
+    });
+
+    if ((res.status = "200" || res.status == "201")) {
+      dispatch({
+        type: "REMOVE_ITEM_FROM_WISHLIST",
+        payload: res.data.product_id,
       });
-
-      if ((res.status = "200" || res.status == "201")) {
-        dispatch({
-          type: "REMOVE_ITEM_FROM_WISHLIST",
-          payload: res.data.product_id,
-        });
-      }
-
-      setIsUpdating(false);
-    } catch (error) {
-      setIsUpdating(false);
-      throw new Error("can not be deleted to wishlist");
     }
+
+    setIsUpdating(false);
+  } catch (error) {
+    setIsUpdating(false);
+    throw new Error("can not be deleted to wishlist");
   }
 }
