@@ -17,7 +17,7 @@ export function AddToCartBtn({ product }) {
     if (isInList(state.productsInCart, product.productID))
       navigate("/cart", { replace: true });
     else {
-      addItemToCart(dispatch, product, state, setIsAddingToCart);
+      addItemToCart(dispatch, product, setIsAddingToCart, state);
     }
   }
 
