@@ -10,7 +10,7 @@ export function CartProducts() {
   return (
     <>
       {productsInCart.map((product) => (
-        <CartProduct product={product} key={product.id} />
+        <CartProduct product={product} key={product.productID} />
       ))}
     </>
   );

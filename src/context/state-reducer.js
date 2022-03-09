@@ -10,14 +10,14 @@ export function stateReducer(state, { type, payload }) {
       return {
         ...state,
         productsInCart: state.productsInCart.filter(
-          (product) => product.id !== payload
+          (product) => product.productID !== payload
         ),
       };
     case "UPDATE_CART_QUANTITY":
       return {
         ...state,
         productsInCart: state.productsInCart.map((product) =>
-          product.id === payload.id
+          product.productID === payload.id
             ? { ...product, cartQty: payload.quantity }
             : product
         ),
@@ -31,7 +31,7 @@ export function stateReducer(state, { type, payload }) {
       return {
         ...state,
         productsInWishList: state.productsInWishList.filter(
-          (product) => product.product_id !== payload
+          (product) => product.productID !== payload
         ),
       };
     default:
