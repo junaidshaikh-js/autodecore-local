@@ -54,6 +54,12 @@
   .card-body {
     margin-left: 0;
   }
+
+  .card-body .btn.btn-complementary {
+    width: 100%;
+    padding: 0.4rem;
+    font-size: 1rem;
+  }
 }
 
 @media screen and (min-width: 769px) {

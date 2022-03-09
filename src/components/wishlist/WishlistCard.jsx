@@ -3,7 +3,8 @@ import { useState } from "react";
 import { ProductCardPrice } from "../productListing/ProductCardPrice";
 import { ProductHeader } from "../productListing/ProductHeader";
 import { useStateContext } from "../../context";
-import { removeItemFromWishlist } from "../../utils/server-request";
+import { removeItemFromWishlist, moveToCart } from "../../utils/server-request";
+import { BtnComplementary } from "../buttons";
 
 export function WishlistCard({ product }) {
   const { state, dispatch } = useStateContext();
@@ -27,6 +28,13 @@ export function WishlistCard({ product }) {
           discountedPrice={product.discountedPrice}
           cnames="flex align-center"
         />
+
+        <BtnComplementary
+          onClick={() => moveToCart(dispatch, product, setIsUpdating, state)}
+          disabled={setIsUpdating}
+        >
+          Move to Cart
+        </BtnComplementary>
       </div>
 
       <button

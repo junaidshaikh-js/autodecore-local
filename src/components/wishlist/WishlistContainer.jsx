@@ -8,7 +8,7 @@ export function WishlistContainer() {
   return (
     <section className="wishlist-container bg-white m-1 p-1 flex-grow">
       <header className=" border-bottom">
-        <h1 className="h3">My Wishlist ({state.productsInWishList.length})</h1>
+        <h1 className="h4">My Wishlist ({state.productsInWishList.length})</h1>
       </header>
 
       {state.productsInWishList.length ? (
