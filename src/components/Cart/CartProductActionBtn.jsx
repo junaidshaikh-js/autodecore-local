@@ -6,11 +6,12 @@ import {
   decreaseProductQuantity,
   increaseProductQuantity,
   removeItemFromCart,
+  saveToWishlist,
 } from "../../utils";
 
 export function CartProductActionBtn({ product }) {
   const [isUpdating, setIsUpdating] = useState(false);
-  const { dispatch } = useStateContext();
+  const { state, dispatch } = useStateContext();
 
   return (
     <section className="cart-product-actions w-100">
@@ -18,7 +19,7 @@ export function CartProductActionBtn({ product }) {
         <button
           className="btn decrease-product-quantity"
           onClick={() => {
-            decreaseProductQuantity(dispatch, product, setIsUpdating);
+            decreaseProductQuantity(dispatch, product, setIsUpdating, state);
           }}
           disabled={product.cartQty === 1 || isUpdating ? true : false}
         >
@@ -36,7 +37,7 @@ export function CartProductActionBtn({ product }) {
         <button
           className="btn increase-product-quantity"
           onClick={() =>
-            increaseProductQuantity(dispatch, product, setIsUpdating)
+            increaseProductQuantity(dispatch, product, setIsUpdating, state)
           }
           disabled={isUpdating}
         >
@@ -45,14 +46,20 @@ export function CartProductActionBtn({ product }) {
       </div>
 
       <div className="pt-sm mt-sm  flex justify-between w-100">
-        <button className="btn">
+        <button
+          className="btn"
+          onClick={() =>
+            saveToWishlist(dispatch, product, setIsUpdating, state)
+          }
+          disabled={isUpdating}
+        >
           <FaHeart color="gray" />{" "}
           <span className="ml-sm">Save to wishlist</span>
         </button>
         <button
           className="btn"
           onClick={() => {
-            removeItemFromCart(dispatch, product, setIsUpdating);
+            removeItemFromCart(dispatch, product, setIsUpdating, state);
           }}
           disabled={isUpdating}
         >

@@ -14,7 +14,7 @@ export function AddToCartBtn({ product }) {
   const { state, dispatch } = useStateContext();
 
   function handleAddToCart(product) {
-    if (isInList(state.productsInCart, product.id))
+    if (isInList(state.productsInCart, product.productID))
       navigate("/cart", { replace: true });
     else {
       addItemToCart(dispatch, product, state, setIsAddingToCart);
@@ -31,7 +31,8 @@ export function AddToCartBtn({ product }) {
         <span className="flex justify-center align-center">
           <InlineLoader /> "Adding"
         </span>
-      ) : isInList(state.productsInCart, product.id) && product.inStock ? (
+      ) : isInList(state.productsInCart, product.productID) &&
+        product.inStock ? (
         "Go to Cart"
       ) : (
         "Add to Cart"

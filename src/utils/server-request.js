@@ -2,7 +2,7 @@
 import axios from "axios";
 
 import { PRODUCTS_URL, CART_URL, WISHLIST_URL } from "./constant";
-import { isInList } from "./helper-function";
+import { getId, isInList } from "./helper-function";
 
 export const getProducts = async (dispatch, setLoading) => {
   try {
@@ -51,7 +51,6 @@ export const addItemToCart = async (dispatch, product, state, isLoading) => {
       url: CART_URL,
       data: {
         ...product,
-        product_id: product.id,
         cartQty: 1,
       },
     });
@@ -72,37 +71,44 @@ export const addItemToCart = async (dispatch, product, state, isLoading) => {
 export async function decreaseProductQuantity(
   dispatch,
   product,
-  setIsUpdating
+  setIsUpdating,
+  state
 ) {
   const quantity = product.cartQty - 1;
 
-  updateCartQuantity(dispatch, product, quantity, setIsUpdating);
+  updateCartQuantity(dispatch, product, quantity, setIsUpdating, state);
 }
 
 export async function increaseProductQuantity(
   dispatch,
   product,
-  setIsUpdating
+  setIsUpdating,
+  state
 ) {
   if (product.cartQty >= 3) {
     alert("can not add more than 3");
   } else {
     const quantity = product.cartQty + 1;
 
-    updateCartQuantity(dispatch, product, quantity, setIsUpdating);
+    updateCartQuantity(dispatch, product, quantity, setIsUpdating, state);
   }
 }
 
-export async function removeItemFromCart(dispatch, product, setIsUpdating) {
+export async function removeItemFromCart(
+  dispatch,
+  product,
+  setIsUpdating,
+  state
+) {
   setIsUpdating(true);
   try {
     const res = await axios({
       method: "delete",
-      url: `${CART_URL}/${product.id}`,
+      url: `${CART_URL}/${getId(state.productsInCart, product.productID)}`,
     });
 
     if (res.status == 200 || res.status == 201) {
-      dispatch({ type: "REMOVE_ITEM_FROM_CART", payload: res.data.id });
+      dispatch({ type: "REMOVE_ITEM_FROM_CART", payload: res.data.productID });
     }
 
     setIsUpdating(false);
@@ -115,13 +121,14 @@ export async function updateCartQuantity(
   dispatch,
   product,
   quantity,
-  setIsUpdating
+  setIsUpdating,
+  state
 ) {
   setIsUpdating(true);
   try {
     const res = await axios({
       method: "put",
-      url: `${CART_URL}/${product.id}`,
+      url: `${CART_URL}/${getId(state.productsInCart, product.productID)}`,
       data: {
         cartQty: quantity,
       },
@@ -130,7 +137,7 @@ export async function updateCartQuantity(
     if (res.status == 200 || res.status == 201) {
       dispatch({
         type: "UPDATE_CART_QUANTITY",
-        payload: { id: res.data.id, quantity: quantity },
+        payload: { id: res.data.productID, quantity: quantity },
       });
     }
 
@@ -142,14 +149,13 @@ export async function updateCartQuantity(
 
 export async function toggleWishList(dispatch, product, setIsUpdating, state) {
   setIsUpdating(true);
-  if (!isInList(state.productsInWishList, product.id)) {
+  if (!isInList(state.productsInWishList, product.productID)) {
     try {
       const res = await axios({
         method: "post",
         url: WISHLIST_URL,
         data: {
           ...product,
-          product_id: product.id,
           inWishList: true,
         },
       });
@@ -163,27 +169,45 @@ export async function toggleWishList(dispatch, product, setIsUpdating, state) {
       throw new Error("can not be added to wishlist");
     }
   } else {
-    try {
-      const res = await axios({
-        method: "delete",
-        url: `${WISHLIST_URL}/${
-          state.productsInWishList.find(
-            (item) => item.product_id == product.id
-          )["id"]
-        }`,
+    removeItemFromWishlist(dispatch, product, setIsUpdating, state);
+  }
+}
+
+export async function removeItemFromWishlist(
+  dispatch,
+  product,
+  setIsUpdating,
+  state
+) {
+  try {
+    const res = await axios({
+      method: "delete",
+      url: `${WISHLIST_URL}/${getId(
+        state.productsInWishList,
+        product.productID
+      )}`,
+    });
+
+    if ((res.status = "200" || res.status == "201")) {
+      dispatch({
+        type: "REMOVE_ITEM_FROM_WISHLIST",
+        payload: res.data.productID,
       });
-
-      if ((res.status = "200" || res.status == "201")) {
-        dispatch({
-          type: "REMOVE_ITEM_FROM_WISHLIST",
-          payload: res.data.product_id,
-        });
-      }
-
-      setIsUpdating(false);
-    } catch (error) {
-      setIsUpdating(false);
-      throw new Error("can not be deleted to wishlist");
     }
+
+    setIsUpdating(false);
+  } catch (error) {
+    setIsUpdating(false);
+    throw new Error("can not be deleted from wishlist");
+  }
+}
+
+export async function saveToWishlist(dispatch, product, setIsUpdating, state) {
+  try {
+    removeItemFromCart(dispatch, product, setIsUpdating, state);
+
+    toggleWishList(dispatch, product, setIsUpdating, state);
+  } catch (error) {
+    throw new Error("Item can not be saved to wishlist");
   }
 }

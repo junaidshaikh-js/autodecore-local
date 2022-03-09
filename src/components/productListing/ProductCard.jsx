@@ -44,7 +44,7 @@ export function ProductCard({ product }) {
             }
             disabled={isUpdating}
           >
-            {isInList(state.productsInWishList, product.id) ? (
+            {isInList(state.productsInWishList, product.productID) ? (
               <FaHeart color="red" fontSize="18px" />
             ) : (
               <FaRegHeart color="red" fontSize="18px" />

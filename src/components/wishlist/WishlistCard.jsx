@@ -1,7 +1,13 @@
+import { useState } from "react";
+
 import { ProductCardPrice } from "../productListing/ProductCardPrice";
 import { ProductHeader } from "../productListing/ProductHeader";
+import { useStateContext } from "../../context";
+import { removeItemFromWishlist } from "../../utils/server-request";
 
 export function WishlistCard({ product }) {
+  const { state, dispatch } = useStateContext();
+  const [isUpdating, setIsUpdating] = useState(false);
   return (
     <>
       <div className="card-image">
@@ -23,7 +29,13 @@ export function WishlistCard({ product }) {
         />
       </div>
 
-      <button className="btn wishlist-remove-btn">
+      <button
+        className="btn wishlist-remove-btn"
+        onClick={() =>
+          removeItemFromWishlist(dispatch, product, setIsUpdating, state)
+        }
+        disabled={isUpdating}
+      >
         <i className="fas fa-trash"></i>
       </button>
     </>

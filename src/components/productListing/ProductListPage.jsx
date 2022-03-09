@@ -34,7 +34,9 @@ export function ProductListingPage() {
 
             <div className="product-container grid mt-2">
               {products.map((product) => {
-                return <ProductCard key={product.id} product={product} />;
+                return (
+                  <ProductCard key={product.productID} product={product} />
+                );
               })}
             </div>
           </section>
