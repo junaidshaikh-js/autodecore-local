@@ -43,9 +43,14 @@ export const getWishList = async (dispatch) => {
   }
 };
 
-export const addItemToCart = async (dispatch, product, state, isLoading) => {
+export const addItemToCart = async (
+  dispatch,
+  product,
+  setIsUpdating,
+  state
+) => {
   try {
-    isLoading(true);
+    setIsUpdating(true);
     const res = await axios({
       method: "post",
       url: CART_URL,
@@ -62,7 +67,7 @@ export const addItemToCart = async (dispatch, product, state, isLoading) => {
       });
     }
 
-    isLoading(false);
+    setIsUpdating(false);
   } catch (error) {
     throw new Error("failed! try again");
   }
@@ -209,5 +214,15 @@ export async function saveToWishlist(dispatch, product, setIsUpdating, state) {
     toggleWishList(dispatch, product, setIsUpdating, state);
   } catch (error) {
     throw new Error("Item can not be saved to wishlist");
+  }
+}
+
+export async function moveToCart(dispatch, product, setIsUpdating, state) {
+  try {
+    await removeItemFromWishlist(dispatch, product, setIsUpdating, state);
+
+    await addItemToCart(dispatch, product, setIsUpdating, state);
+  } catch (error) {
+    throw new Error("Can not be added to cart");
   }
 }
