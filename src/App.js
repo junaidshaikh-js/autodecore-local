@@ -9,6 +9,7 @@ import { useStateContext } from "./context";
 
 import "./style.css";
 import { Wishlist } from "./components/wishlist";
+import { Home } from "./components/home";
 
 function App() {
   const { dispatch } = useStateContext();
@@ -22,6 +23,7 @@ function App() {
     <>
       <Header />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductListingPage />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist />} />

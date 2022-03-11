@@ -5,6 +5,7 @@ import { SearchBox } from "./SearchBox";
 import { NavButtons } from "./NavButtons";
 
 import "./header.css";
+import { Link } from "react-router-dom";
 
 export function Header() {
   return (
@@ -16,12 +17,13 @@ export function Header() {
               <BtnIcon cnames={["btn", "hy-hamburger-btn"]}>
                 <FaBars />
               </BtnIcon>
-
-              <div className="hy-logo">
-                <span>
-                  Auto<span style={{ color: "#FFDE59" }}>Decore</span>
-                </span>
-              </div>
+              <Link to="/">
+                <div className="hy-logo">
+                  <span>
+                    Auto<span style={{ color: "#FFDE59" }}>Decore</span>
+                  </span>
+                </div>
+              </Link>
             </div>
             <NavButtons />
           </div>
