@@ -26,7 +26,7 @@ export function ProductCard({ product }) {
           rating={product.rating}
         />
 
-        <p className="txt-sm">{product.shortDesc + "..."}</p>
+        {/* <p className="txt-sm">{product.shortDesc + "..."}</p> */}
 
         <ProductCardPrice
           discountedPrice={product.discountedPrice}
