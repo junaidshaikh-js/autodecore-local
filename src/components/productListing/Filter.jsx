@@ -1,12 +1,68 @@
-export function Filter() {
-  return (
-    <aside className="filter-section mt-1 p-1 mx-1 bg-white">
-      <header className="flex justify-between">
-        <h5>Filters</h5>
-        <button className="btn btn-link">Clear</button>
-      </header>
+import { useEffect, useState } from "react";
+import { FaFilter } from "react-icons/fa";
+import { BtnComplementary } from "../buttons/BtnComplementary";
 
-      <section>
+const categories = [
+  "Vehicle Mats",
+  "Tyre and Wheel",
+  "Vehicle Cleaners",
+  "Vehicle Lights",
+  "Car Covers",
+  "Glass Cleaner",
+  "Pressure Washer",
+  "Air Purifiers",
+  "Vacuum Cleaner",
+];
+
+const ratingFilters = [
+  "four and above",
+  "three and above",
+  "two and above",
+  "one and above",
+];
+
+export function Filter() {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  function toggleFilter() {
+    setIsFilterOpen((f) => !f);
+  }
+
+  useEffect(() => {
+    isFilterOpen
+      ? (document.body.style.position = "fixed")
+      : (document.body.style.position = "inherit");
+  }, [isFilterOpen]);
+
+  return (
+    <aside
+      className={
+        "filter-section mt-1 p-sm mx-1 bg-white " +
+        (isFilterOpen ? " open-filter" : null)
+      }
+    >
+      <div>
+        <div className="flex justify-center">
+          <div onClick={toggleFilter} className="mobile-filter">
+            {isFilterOpen ? (
+              <BtnComplementary>Apply</BtnComplementary>
+            ) : (
+              <button className="btn btn-primary m-auto">
+                <FaFilter fontSize="1.2rem" /> Filters
+              </button>
+            )}
+          </div>
+          {isFilterOpen && <button className="btn btn-link">Clear</button>}
+        </div>
+
+        <div className="desktop-filter">
+          <span className="txt-rg txt-bold">Filters</span>
+
+          <button className="btn btn-link">{"Clear"}</button>
+        </div>
+      </div>
+
+      <section className="mb-2">
         <h6>Price</h6>
         <input
           type="range"
@@ -29,36 +85,33 @@ export function Filter() {
           <option value="900" label="900"></option>
           <option value="1000" label="1000"></option>
         </datalist>
+
+        <div className="flex justify-between">
+          <span>0</span>
+          <span>500</span>
+          <span>1000</span>
+        </div>
       </section>
 
       <section>
         <h6>Categories</h6>
 
         <ul className="pl-1">
-          <li>
-            <label className="flex align-center">
-              <input type="checkbox" className="mr-1" name="vehicle mats" />
-              Vehicle Mats
-            </label>
-          </li>
-          <li>
-            <label className="flex align-center">
-              <input type="checkbox" className="mr-1" name="tyre and wheel" />
-              Tyre and Wheel
-            </label>
-          </li>
-          <li>
-            <label className="flex align-center">
-              <input type="checkbox" className="mr-1" name="vehicle cleaners" />
-              Vehicle Cleaners
-            </label>
-          </li>
-          <li>
-            <label className="flex align-center">
-              <input type="checkbox" className="mr-1" name="vehicle lights" />
-              Vehicle Lights
-            </label>
-          </li>
+          {categories.map((category) => {
+            return (
+              <li key={category}>
+                <label className="flex align-center">
+                  <input
+                    type="checkbox"
+                    className="mr-1"
+                    name={category.toLowerCase()}
+                    aria-label={category}
+                  />
+                  {category}
+                </label>
+              </li>
+            );
+          })}
         </ul>
       </section>
 
@@ -66,53 +119,22 @@ export function Filter() {
         <h6>Customer Ratings</h6>
 
         <ul className="pl-1">
-          <li>
-            <label className="flex align-center">
-              <input
-                type="radio"
-                name="customer-rating"
-                value="four and above"
-                className="mr-1"
-              />
-              4 <i className="fas fa-star px-sm"></i> & above
-            </label>
-          </li>
-
-          <li>
-            <label className="flex align-center">
-              <input
-                type="radio"
-                name="customer-rating"
-                value="three and above"
-                className="mr-1"
-              />
-              3 <i className="fas fa-star px-sm"></i> & above
-            </label>
-          </li>
-
-          <li>
-            <label className="flex align-center">
-              <input
-                type="radio"
-                name="customer-rating"
-                value="two and above"
-                className="mr-1"
-              />
-              2 <i className="fas fa-star px-sm"></i> & above
-            </label>
-          </li>
-
-          <li>
-            <label className="flex align-center">
-              <input
-                type="radio"
-                name="customer-rating"
-                value="one and above"
-                className="mr-1"
-              />
-              1 <i className="fas fa-star px-sm"></i> & above
-            </label>
-          </li>
+          {ratingFilters.map((ratingFilter, index) => {
+            return (
+              <li key={ratingFilter}>
+                <label className="flex align-center">
+                  <input
+                    type="radio"
+                    name="customer-rating"
+                    value={ratingFilter}
+                    className="mr-1"
+                  />
+                  {ratingFilters.length - index}{" "}
+                  <i className="fas fa-star px-sm" title="star"></i> & above
+                </label>
+              </li>
+            );
+          })}
         </ul>
       </section>
 
@@ -149,7 +171,12 @@ export function Filter() {
       <section>
         <h6>Availability</h6>
         <label className="flex align-center pl-1">
-          <input type="checkbox" className="mr-1" name="out of stock" />
+          <input
+            type="checkbox"
+            className="mr-1"
+            name="out of stock"
+            aria-label="Out of Stock"
+          />
           Out of stock
         </label>
       </section>
