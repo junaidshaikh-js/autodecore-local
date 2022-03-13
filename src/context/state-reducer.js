@@ -34,6 +34,38 @@ export function stateReducer(state, { type, payload }) {
           (product) => product.productID !== payload
         ),
       };
+    case "INCLUDE_OUT_OF_STOCK":
+      return { ...state, filters: { ...state.filters, inStock: payload } };
+    case "SORT_BY_PRICE":
+      return {
+        ...state,
+        filters: { ...state.filters, sort: payload },
+      };
+    case "SORT_BY_RATING":
+      return {
+        ...state,
+        filters: { ...state.filters, rating: payload },
+      };
+    case "FILTER_BY_CATEGORY":
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          categories: payload.isChecked
+            ? [...state.filters.categories, payload.value]
+            : state.filters.categories.filter(
+                (category) => category !== payload.value
+              ),
+        },
+      };
+    case "FILTER_BY_PRICE_RANGE":
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          price: payload,
+        },
+      };
     default:
       throw new Error("Unhandled action type");
   }

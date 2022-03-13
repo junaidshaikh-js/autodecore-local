@@ -8,6 +8,13 @@ const initialState = {
   products: [],
   productsInCart: [],
   productsInWishList: [],
+  filters: {
+    sort: "",
+    inStock: false,
+    rating: 0,
+    categories: [],
+    price: 2000,
+  },
 };
 
 export function StateProvider({ children }) {

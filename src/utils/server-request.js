@@ -4,17 +4,15 @@ import axios from "axios";
 import { PRODUCTS_URL, CART_URL, WISHLIST_URL } from "./constant";
 import { getId, isInList } from "./helper-function";
 
-export const getProducts = async (dispatch, setLoading) => {
+export const getProducts = async (dispatch) => {
   try {
-    setLoading(true);
     const res = await axios.get(PRODUCTS_URL);
 
     if (res.status == 200 || res.status == 201) {
       dispatch({ type: "SET_PRODUCTS", payload: res.data });
     }
-
-    setLoading(false);
   } catch (error) {
+    console.log(error);
     throw new Error("Products can not be loaded");
   }
 };

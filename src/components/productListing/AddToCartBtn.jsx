@@ -27,12 +27,13 @@ export function AddToCartBtn({ product }) {
       disabled={product.inStock || isAddingToCart ? false : true}
       onClick={() => handleAddToCart(product)}
     >
-      {isAddingToCart ? (
+      {!product.inStock ? (
+        "OUT OF STOCK"
+      ) : isAddingToCart ? (
         <span className="flex justify-center align-center">
           <InlineLoader /> "Adding"
         </span>
-      ) : isInList(state.productsInCart, product.productID) &&
-        product.inStock ? (
+      ) : isInList(state.productsInCart, product.productID) ? (
         "Go to Cart"
       ) : (
         "Add to Cart"
