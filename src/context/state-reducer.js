@@ -66,6 +66,18 @@ export function stateReducer(state, { type, payload }) {
           price: payload,
         },
       };
+    case "CLEAR_FILTERS":
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          sort: "",
+          inStock: false,
+          rating: 0,
+          categories: [],
+          price: 2000,
+        },
+      };
     default:
       throw new Error("Unhandled action type");
   }

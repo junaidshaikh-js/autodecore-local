@@ -1,4 +1,4 @@
-export function FilterByCustomerRating({ dispatch }) {
+export function FilterByCustomerRating({ dispatch, filters }) {
   const ratingFilters = [
     "four and above",
     "three and above",
@@ -26,6 +26,7 @@ export function FilterByCustomerRating({ dispatch }) {
                       payload: ratingFilters.length - index,
                     });
                   }}
+                  checked={filters.rating === ratingFilters.length - index}
                 />
                 {ratingFilters.length - index}{" "}
                 <i className="fas fa-star px-sm" title="star"></i> & above

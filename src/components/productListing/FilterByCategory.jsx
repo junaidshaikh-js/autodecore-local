@@ -1,9 +1,9 @@
 export function FilterByCategory({ dispatch, filters }) {
   const categories = [
-    "Vehicle Mats",
-    "Tyre and Wheel",
+    "Car Mats",
+    "Car Tyres",
     "Vehicle Cleaners",
-    "Vehicle Lights",
+    "Car Lighting",
     "Car Covers",
     "Glass Cleaner",
     "Pressure Washer",
