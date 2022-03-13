@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { Header } from "./components/header/header";
 import { ProductListingPage } from "./components/productListing";
 import { Cart } from "./components";
-import { getCartProducts, getWishList } from "./utils";
+import { getCartProducts, getProducts, getWishList } from "./utils";
 import { useStateContext } from "./context";
 
 import "./style.css";
@@ -15,6 +15,7 @@ function App() {
   const { dispatch } = useStateContext();
 
   useEffect(() => {
+    getProducts(dispatch);
     getCartProducts(dispatch);
     getWishList(dispatch);
   }, [dispatch]);
