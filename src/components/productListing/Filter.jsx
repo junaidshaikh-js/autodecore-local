@@ -44,25 +44,41 @@ export function Filter() {
               </button>
             )}
           </div>
-          {isFilterOpen && <button className="btn btn-link">Clear</button>}
+          {isFilterOpen && (
+            <button
+              className="btn btn-link"
+              onClick={() => {
+                dispatch({ type: "CLEAR_FILTERS" });
+              }}
+            >
+              Clear
+            </button>
+          )}
         </div>
 
         <div className="desktop-filter">
           <span className="txt-rg txt-bold">Filters</span>
 
-          <button className="btn btn-link">{"Clear"}</button>
+          <button
+            className="btn btn-link"
+            onClick={() => {
+              dispatch({ type: "CLEAR_FILTERS" });
+            }}
+          >
+            {"Clear"}
+          </button>
         </div>
       </div>
 
-      <FilterByPriceRange dispatch={dispatch} />
+      <FilterByPriceRange dispatch={dispatch} filters={filters} />
 
       <FilterByCategory dispatch={dispatch} filters={filters} />
 
-      <FilterByCustomerRating dispatch={dispatch} />
+      <FilterByCustomerRating dispatch={dispatch} filters={filters} />
 
-      <SortByPrice dispatch={dispatch} />
+      <SortByPrice dispatch={dispatch} filters={filters} />
 
-      <FilterByAvailability dispatch={dispatch} />
+      <FilterByAvailability dispatch={dispatch} filters={filters} />
     </aside>
   );
 }

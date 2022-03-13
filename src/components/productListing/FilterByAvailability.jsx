@@ -1,5 +1,4 @@
-import React from "react";
-export function FilterByAvailability({ dispatch }) {
+export function FilterByAvailability({ dispatch, filters }) {
   return (
     <section>
       <h6>Availability</h6>
@@ -15,6 +14,7 @@ export function FilterByAvailability({ dispatch }) {
               payload: e.target.checked,
             })
           }
+          checked={filters.inStock}
         />
         Out of stock
       </label>

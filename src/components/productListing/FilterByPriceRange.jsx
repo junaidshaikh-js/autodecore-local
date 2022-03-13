@@ -1,11 +1,7 @@
-import { useState } from "react";
-
-export function FilterByPriceRange({ dispatch }) {
-  const [priceRange, setPriceRange] = useState(2000);
-
+export function FilterByPriceRange({ dispatch, filters }) {
   function handlePriceRange(e) {
     let value = e.target.value;
-    setPriceRange(value);
+
     dispatch({
       type: "FILTER_BY_PRICE_RANGE",
       payload: value,
@@ -22,7 +18,7 @@ export function FilterByPriceRange({ dispatch }) {
         max="2000"
         step="100"
         list="tickmarks"
-        value={priceRange}
+        value={filters.price}
         onChange={handlePriceRange}
       />
 
@@ -40,7 +36,7 @@ export function FilterByPriceRange({ dispatch }) {
       </datalist>
 
       <div className="txt-bold">
-        <p>INR: 0 - {priceRange}</p>
+        <p>INR: 0 - {filters.price}</p>
       </div>
     </section>
   );
