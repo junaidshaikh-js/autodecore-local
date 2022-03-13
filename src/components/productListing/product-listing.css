@@ -41,12 +41,13 @@
   font-size: 0.835rem !important;
 }
 
-.filter-section {
-  height: fit-content;
-}
-
 .card-vertical .card-image {
   width: 150px;
+}
+
+/* overwrite component library CSS */
+.filter-section .btn-link {
+  font-size: 1rem;
 }
 
 /* taken from CSS-TRICKS 
@@ -54,6 +55,43 @@
 https://css-tricks.com/almanac/properties/l/line-clamp/
 
 */
+
+/* filters */
+.filter-section {
+  position: fixed;
+  bottom: 0;
+  height: 4rem;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+  margin: 0;
+  box-shadow: 0 0 3px 4px var(--light-gray);
+  transition: height 0.2s linear;
+}
+
+.filter-section.open-filter {
+  top: 0;
+  z-index: 1;
+  height: 100%;
+  overflow: auto;
+  width: 100%;
+  margin: 0;
+  overflow-y: scroll;
+  padding: 2rem;
+}
+
+.filter-section.open-filter div {
+  justify-content: space-between;
+}
+
+.mobile-filter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.desktop-filter {
+  display: none;
+}
 
 .card-title {
   display: -webkit-box;
@@ -72,10 +110,25 @@ https://css-tricks.com/almanac/properties/l/line-clamp/
   .filter-section {
     flex-basis: 25%;
     flex-shrink: 0;
+    position: inherit;
+    height: fit-content;
+    margin: 1rem 0 0 1rem;
+    box-shadow: none;
   }
   .product-listing.flex-column {
     flex-direction: row;
   }
+
+  .mobile-filter {
+    display: none;
+  }
+
+  .desktop-filter {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
   .product-container {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
