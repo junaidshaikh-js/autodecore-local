@@ -2,7 +2,7 @@ import { FilterByAvailability } from "./FilterByAvailability";
 import { FilterByCustomerRating } from "./FilterByCustomerRating";
 import { FilterByCategory } from "./FilterByCategory";
 import { FilterByPriceRange } from "./FilterByPriceRange";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaFilter } from "react-icons/fa";
 import { useStateContext } from "../../context";
 import { BtnComplementary } from "../buttons/BtnComplementary";
