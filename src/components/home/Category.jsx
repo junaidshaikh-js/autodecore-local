@@ -26,7 +26,7 @@ export function Category({ name, sources }) {
                     });
                   }}
                 >
-                  <img src={image} alt="" />
+                  <img src={image} alt={name + " Category"} />
                 </figure>
               </Link>
             );
