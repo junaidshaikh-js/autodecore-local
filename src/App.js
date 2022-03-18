@@ -10,6 +10,7 @@ import { useStateContext } from "./context";
 import "./style.css";
 import { Wishlist } from "./components/wishlist";
 import { Home } from "./components/home";
+import { Login } from "./components/authentication";
 
 function App() {
   const { dispatch } = useStateContext();
@@ -28,6 +29,7 @@ function App() {
         <Route path="/products" element={<ProductListingPage />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   );

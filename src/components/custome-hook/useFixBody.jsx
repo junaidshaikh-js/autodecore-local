@@ -3,7 +3,7 @@ import { useEffect } from "react";
 export function useFixBody(isOpen) {
   useEffect(() => {
     isOpen
-      ? (document.body.style.position = "fixed")
-      : (document.body.style.position = "inherit");
+      ? (document.body.style.overflow = "hidden")
+      : (document.body.style.overflow = "auto");
   }, [isOpen]);
 }

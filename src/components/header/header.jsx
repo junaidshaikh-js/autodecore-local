@@ -59,7 +59,9 @@ export function Header() {
 
         <ul>
           <li className="my-sm">
-            <button className="btn">Login</button>
+            <Link to="/login">
+              <button className="btn">Login</button>
+            </Link>
           </li>
 
           <li className="my-sm">
