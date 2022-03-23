@@ -11,6 +11,7 @@ import "./style.css";
 import { Wishlist } from "./components/wishlist";
 import { Home } from "./components/home";
 import { Login, Signup } from "./components/authentication";
+import { Footer } from "./components/footer/Footer";
 
 function App() {
   const { dispatch } = useStateContext();
@@ -32,6 +33,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
+      <Footer />
     </>
   );
 }
