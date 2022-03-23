@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { useStateContext } from "../../context/state-context";
 import { BtnSecondary } from "../buttons";
 
 export function NavButtons() {
+  const location = useLocation();
+
   const {
     state: { productsInCart, productsInWishList },
   } = useStateContext();
@@ -12,9 +14,19 @@ export function NavButtons() {
     <div>
       <ul className="hy-navbar-links">
         <li className="mr-1">
-          <span className="login-btn">
-            <BtnSecondary buttonText="login" />
-          </span>
+          {location.pathname === "/login" ? (
+            <Link to="/signup">
+              <span className="signup-btn">
+                <BtnSecondary buttonText="signup" />
+              </span>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <span className="login-btn">
+                <BtnSecondary buttonText="login" />
+              </span>
+            </Link>
+          )}
         </li>
         <li className="mr-sm">
           <Link to="/wishlist">
