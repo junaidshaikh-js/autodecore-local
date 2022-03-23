@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { BtnComplementary } from "../buttons";
 import "./authentication.css";
 
 export function Login() {
@@ -68,12 +69,9 @@ export function Login() {
                   </a>
                 </div> */}
 
-                <button
-                  className="btn login-submit mt-1 complementary-btn w-100"
-                  type="submit"
-                >
+                <BtnComplementary cnames="w-100 mt-1" type="submit">
                   Login
-                </button>
+                </BtnComplementary>
               </form>
 
               <div className="txt-center mt-1 primary-link">

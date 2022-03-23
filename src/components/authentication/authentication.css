@@ -33,10 +33,10 @@
   height: auto;
 }
 
-.complementary-btn {
+.btn-complementary {
   background-color: var(--complementary-color);
   color: var(--white) !important;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .btn.btn-link {
