@@ -57,7 +57,7 @@ export function Header() {
           </span>
         </div>
 
-        <ul>
+        <ul onClick={toggleSideMenu}>
           <li className="my-sm">
             <Link to="/login">
               <button className="btn">Login</button>
@@ -65,7 +65,9 @@ export function Header() {
           </li>
 
           <li className="my-sm">
-            <button className="btn">Singup</button>
+            <Link to="/signup">
+              <button className="btn">Singup</button>
+            </Link>
           </li>
 
           <li className="my-sm">
